@@ -5,7 +5,8 @@ program random_lcm
   implicit  none
   !
   !     declaration of variables
-  integer :: i, number, old, seed, x, a,m,c,j, period
+  integer :: i, num, old, seed, x, a,m,c,j, period
+  real :: rndm
   !
   !     supply initial values of some variables:
   !     seed:   to start; a:
@@ -18,24 +19,25 @@ program random_lcm
 
 
   print*,' How many numbers do you want to generate ?'
-  read(*,*)number
+  read(*,*)num
   !
   OPEN(unit=1, file="random.dat", status="replace", action="write")
   old = seed
   !
-  do i = 1, number
+  do i = 1, num
      x = mod ((a*old+c), m)
-     WRITE (unit=1,fmt=*) x
+     rndm = float(x)/m
+     WRITE (unit=1,fmt=*) i, x, rndm
      old = x
 
-     if (i==m)  j=x
-     if (j==x .and. i>m)  then
-       period = i - m
-       print*,j,x,i,m,period
-       exit
-     end if
+   !  if (i==m)  j=x
+   !  if (j==x .and. i>m)  then
+   !    period = i - m
+   !    print*,j,x,i,m,period
+   !    exit
+   !  end if
    end do
   close(1)
   print*,' data saved in random.dat'
-  print*,"Periodo:",period
+  !print*,"Periodo:",period
 end program random_lcm

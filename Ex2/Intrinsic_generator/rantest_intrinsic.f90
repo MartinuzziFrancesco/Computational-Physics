@@ -24,7 +24,7 @@ program rantest_intrinsic
      read(*,*)L        ! length of sequence
     do i = 1,L
      call random_number(rnd)
-    WRITE (unit=1,fmt=*) rnd
+    WRITE (unit=1,fmt=*) i, rnd
   end do
 
 
@@ -35,7 +35,7 @@ program rantest_intrinsic
     do i = 1,L
      call random_number(rnd)
      ran_int = (n_max - n_min + 1)*rnd + n_min
-     WRITE (unit=2,fmt=*) ran_int
+     WRITE (unit=2,fmt=*) i, ran_int
   end do
 
   !  use array x to generate and store L random numbers with a unique call
